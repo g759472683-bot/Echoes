@@ -1,0 +1,505 @@
+/* main-menu.uss — MainMenu screen styles
+ * Epic: main-menu
+ * Engine: Unity 6.3 LTS (UI Toolkit)
+ * References Theme.uss CSS variables via @import
+ */
+
+@import url("../UI/Theme.uss");
+
+/* =========================================================================
+ * Shared: Full-Screen Panel Base
+ * ========================================================================= */
+
+.fullscreen-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    transition-property: opacity;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: ease-out;
+}
+
+/* =========================================================================
+ * Panel 1: Title Screen
+ * ========================================================================= */
+
+#title-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--color-paper-warm), 1);
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition-slow);
+    transition-timing-function: ease-out;
+}
+
+#title-screen.fade-in--active {
+    opacity: 1;
+}
+
+#game-logo {
+    margin-bottom: var(--spacing-xl);
+    align-items: center;
+}
+
+#game-title {
+    font-family: var(--font-family-display);
+    font-size: 72px;
+    color: rgb(20, 15, 10);
+    -unity-text-align: middle-center;
+}
+
+#menu-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+
+#menu-buttons Button {
+    width: 100%;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h2);
+    color: rgba(15, 10, 5, 0.85);
+    background-color: transparent;
+    border-width: 0;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.6;
+    transition-property: opacity, scale;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+    -unity-text-align: middle-center;
+}
+
+#menu-buttons Button:hover {
+    opacity: 1;
+    scale: 1.02;
+}
+
+#background-painting {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 80%;
+    opacity: 0.15;
+    background-size: contain;
+    background-position: right bottom;
+    -unity-background-scale-mode: scale-to-fit;
+    /* Background image set via C# inline style at runtime */
+}
+
+/* =========================================================================
+ * Panel 2: Pause Menu
+ * ========================================================================= */
+
+#pause-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 10;
+}
+
+#pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 10, 5, 0.5);
+}
+
+#pause-menu-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+
+#pause-menu-buttons Button {
+    width: 100%;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h2);
+    color: rgba(var(--color-paper-warm), 0.9);
+    background-color: transparent;
+    border-width: 0;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.7;
+    transition-property: opacity, scale;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+    -unity-text-align: middle-center;
+}
+
+#pause-menu-buttons Button:hover {
+    opacity: 1;
+    scale: 1.02;
+}
+
+/* =========================================================================
+ * Panel 3: Settings Panel
+ * ========================================================================= */
+
+#settings-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-height: 300px;
+    background-color: rgba(var(--color-paper-warm), var(--panel-bg-opacity));
+    border-radius: var(--panel-border-radius);
+    padding: var(--spacing-lg);
+    flex-direction: column;
+    display: none;
+}
+
+#settings-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h1);
+    color: rgb(var(--color-text-primary));
+    -unity-text-align: middle-center;
+    margin-bottom: var(--spacing-lg);
+}
+
+#audio-section-title,
+#language-section-title {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-h2);
+    color: rgb(var(--color-text-secondary));
+    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.slider-row {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.slider-row Label {
+    width: 80px;
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-primary));
+}
+
+.slider-row Slider {
+    flex-grow: 1;
+    height: var(--button-height);
+}
+
+#language-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+#dropdown-language {
+    width: 100%;
+    height: var(--button-height);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+}
+
+#btn-settings-back {
+    width: 100%;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-primary));
+    background-color: transparent;
+    border-color: rgba(var(--color-border), 0.5);
+    border-width: 1px;
+    border-radius: var(--panel-border-radius);
+    margin-top: var(--spacing-md);
+    transition-property: background-color, opacity;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+}
+
+#btn-settings-back:hover {
+    background-color: rgba(var(--color-border), 0.15);
+}
+
+/* =========================================================================
+ * Panel 4: Save/Load Panel
+ * ========================================================================= */
+
+#save-load-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    min-height: 320px;
+    background-color: rgba(var(--color-paper-warm), var(--panel-bg-opacity));
+    border-radius: var(--panel-border-radius);
+    padding: var(--spacing-lg);
+    flex-direction: column;
+    display: none;
+}
+
+#panel-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-h1);
+    color: rgb(var(--color-text-primary));
+    -unity-text-align: middle-center;
+    margin-bottom: var(--spacing-lg);
+}
+
+#slot-list {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.save-slot {
+    flex-direction: column;
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(var(--color-border), 0.3);
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+}
+
+.save-slot:hover {
+    background-color: rgba(var(--color-border), 0.1);
+}
+
+.save-slot Label {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-primary));
+    margin-bottom: 2px;
+}
+
+.slot-empty {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: rgba(60, 45, 30, 0.5);
+    -unity-text-align: middle-center;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+}
+
+#btn-save-load-back {
+    width: 100%;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-primary));
+    background-color: transparent;
+    border-color: rgba(var(--color-border), 0.5);
+    border-width: 1px;
+    border-radius: var(--panel-border-radius);
+    margin-top: var(--spacing-md);
+    transition-property: background-color;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+}
+
+#btn-save-load-back:hover {
+    background-color: rgba(var(--color-border), 0.15);
+}
+
+/* =========================================================================
+ * Panel 5: Modal Confirmation Dialog
+ * ========================================================================= */
+
+#modal-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 20;
+}
+
+#modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#modal-content {
+    width: 360px;
+    min-height: 160px;
+    background-color: rgba(var(--color-paper-warm), var(--panel-bg-opacity));
+    border-radius: var(--panel-border-radius);
+    padding: var(--spacing-lg);
+    flex-direction: column;
+    align-items: center;
+}
+
+#modal-message {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-primary));
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+}
+
+#modal-buttons {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#btn-modal-confirm {
+    flex-grow: 1;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-body);
+    color: rgba(var(--color-paper-warm), 1);
+    background-color: rgb(var(--color-text-primary));
+    border-width: 0;
+    border-radius: var(--panel-border-radius);
+    margin-right: var(--spacing-sm);
+    transition-property: background-color;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+}
+
+#btn-modal-confirm:hover {
+    background-color: rgba(var(--color-text-primary), 0.85);
+}
+
+#btn-modal-cancel {
+    flex-grow: 1;
+    height: var(--button-height);
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-body);
+    color: rgb(var(--color-text-secondary));
+    background-color: transparent;
+    border-color: rgba(var(--color-border), 0.5);
+    border-width: 1px;
+    border-radius: var(--panel-border-radius);
+    margin-left: var(--spacing-sm);
+    transition-property: background-color;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-out;
+}
+
+#btn-modal-cancel:hover {
+    background-color: rgba(var(--color-border), 0.1);
+}
+
+/* =========================================================================
+ * Toast Notification
+ * ========================================================================= */
+
+.toast {
+    position: absolute;
+    bottom: 80px;
+    align-self: center;
+    width: auto;
+    min-width: 200px;
+    background-color: rgba(var(--color-text-primary), 0.9);
+    border-radius: var(--panel-border-radius);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: ease-out;
+}
+
+.toast--visible {
+    opacity: 1;
+}
+
+.toast Label {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    color: rgba(var(--color-paper-warm), 1);
+    -unity-text-align: middle-center;
+}
+
+/* =========================================================================
+ * Fade-in / Fade-out utility classes
+ * ========================================================================= */
+
+.fade-in {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: ease-out;
+}
+
+.fade-in--active {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-in;
+}
+
+.fade-out--active {
+    opacity: 0;
+}
+
+/* =========================================================================
+ * Focus indicator overrides for main menu
+ * ========================================================================= */
+
+Button:focus {
+    outline-color: rgba(var(--color-accent), 0.8);
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+Slider:focus {
+    outline-color: rgba(var(--color-accent), 0.8);
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+}
+
+DropdownField:focus {
+    outline-color: rgba(var(--color-accent), 0.8);
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+/* =========================================================================
+ * HUD dimming class (applied to InGameHUD during pause)
+ * ========================================================================= */
+
+.hud-dimmed {
+    opacity: 0.3;
+    transition-property: opacity;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: ease-out;
+}

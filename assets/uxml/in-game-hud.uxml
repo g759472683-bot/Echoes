@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd">
+  <!-- In-Game HUD root element tree per GDD in-game-hud Rule 1 -->
+  <ui:VisualElement name="HUD" class="hud-root">
+    <!-- Fragment text overlay: hand-drawn font, transparent bg, picking-mode ignore -->
+    <ui:VisualElement name="fragment-text-overlay" class="fragment-text-overlay">
+      <ui:Label name="fragment-text" class="fragment-text" text="" />
+    </ui:VisualElement>
+
+    <!-- Choice panel: hand-drawn font options + vermilion ink dots -->
+    <ui:VisualElement name="choice-panel" class="choice-panel">
+      <ui:Label name="choice-prompt" class="choice-prompt" text="" />
+      <ui:VisualElement name="choice-options" class="choice-options" />
+    </ui:VisualElement>
+
+    <!-- Association paths: ink trails radiating from center -->
+    <ui:VisualElement name="association-paths" class="association-paths" />
+
+    <!-- Chapter progress: horizontal dots (vermilion solid / hollow) -->
+    <ui:VisualElement name="chapter-progress" class="chapter-progress">
+      <ui:Label name="chapter-name" class="chapter-name" text="" />
+      <ui:VisualElement name="fragment-count" class="fragment-count" />
+    </ui:VisualElement>
+
+    <!-- Interaction hint: small hand-drawn text above cursor -->
+    <ui:VisualElement name="interaction-hint" class="interaction-hint">
+      <ui:Label name="hint-text" class="hint-text" text="" />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

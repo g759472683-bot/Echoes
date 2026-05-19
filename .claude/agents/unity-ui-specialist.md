@@ -208,6 +208,19 @@ Before writing any code:
 - Creating/destroying UI elements instead of pooling/virtualizing
 - Hardcoded strings instead of localization keys
 
+## Version Awareness
+
+**CRITICAL**: Your training data has a knowledge cutoff. Before suggesting UI
+code, you MUST:
+
+1. Read `docs/engine-reference/unity/VERSION.md` to confirm the engine version
+2. Check `docs/engine-reference/unity/deprecated-apis.md` for any deprecated UI APIs
+3. Check `docs/engine-reference/unity/breaking-changes.md` for relevant version transitions
+4. Read `docs/engine-reference/unity/modules/ui.md` for UI subsystem changes
+5. Read `docs/engine-reference/unity/PLUGINS.md` for UI Toolkit / uGUI version-specific notes
+
+When in doubt, prefer the API documented in the reference files over your training data.
+
 ## Coordination
 - Work with **unity-specialist** for overall Unity architecture
 - Work with **ui-programmer** for general UI implementation patterns

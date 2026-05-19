@@ -2,7 +2,7 @@
 
 ## Trigger
 
-Runs before any commit that modifies files in `src/`.
+Runs before any commit that modifies files in `assets/Scripts/`.
 
 ## Purpose
 
@@ -17,14 +17,14 @@ values that should be data-driven.
 # Pre-commit hook: Code quality checks
 # Adapt the specific checks to your language and tooling
 
-CODE_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^src/')
+CODE_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^assets/Scripts/')
 
 EXIT_CODE=0
 
 if [ -n "$CODE_FILES" ]; then
     for file in $CODE_FILES; do
         # Check for hardcoded magic numbers in gameplay code
-        if [[ "$file" == src/gameplay/* ]]; then
+        if [[ "$file" == assets/Scripts/Gameplay/* ]]; then
             # Look for numeric literals that are likely balance values
             # Adjust the pattern for your language
             if grep -nE '(damage|health|speed|rate|chance|cost|duration)[[:space:]]*[:=][[:space:]]*[0-9]+' "$file"; then

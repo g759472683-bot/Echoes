@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "com.unity.addressables": "2.3.2",
+    "com.unity.inputsystem": "1.13.1",
+    "com.unity.localization": "1.5.4",
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.physics": "1.0.0",
+    "com.unity.feature.2d": "2.0.0",
+    "com.unity.test-framework": "1.4.6",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.textmeshpro": "4.0.2",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.render-pipelines.universal": "17.0.4",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.physics2d": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.modules.video": "1.0.0"
+  }
+}

@@ -1,0 +1,154 @@
+/* Theme.uss — Global CSS variables and shared styles for UI Toolkit
+ * Engine: Unity 6.3 LTS (UI Toolkit)
+ * ADR: ADR-0006 (UI Framework)
+ * Story: ui-framework S002
+ *
+ * 6 categories of CSS variables defined on :root:
+ *   --color- (8) — warm ink palette, RGB component format for rgba() animation
+ *   --font-  (6) — handwritten display + sans body, 4 sizes
+ *   --spacing- (5) — xs through xl
+ *   --transition- (3) — fast/normal/slow durations
+ *   --panel- (3) — opacity, radius, padding
+ *   --button- (3) — height, hover brightness, press scale
+ *
+ * Color variables use RGB component values (e.g. 192, 64, 64) so USS can
+ * reference them as rgba(var(--color-accent), 0.8) for transparency animation.
+ * Hex format does NOT work with USS var() + rgba().
+ *
+ * Theme switching: replace this file with Theme_HighContrast.uss at runtime.
+ * UI Toolkit auto-recomputes all var() references on stylesheet change.
+ */
+
+:root {
+    /* =====================================================================
+     * Category 1: Colors (RGB component format)
+     * ===================================================================== */
+
+    /* Backgrounds */
+    --color-bg-primary: 44, 24, 16;
+    --color-bg-secondary: 139, 115, 85;
+
+    /* Text */
+    --color-text-primary: 44, 24, 16;
+    --color-text-secondary: 139, 115, 85;
+
+    /* Accent / Interaction */
+    --color-accent: 192, 64, 64;
+    --color-accent-hover: 220, 80, 80;
+
+    /* Paper tones (panel surfaces) */
+    --color-paper-warm: 245, 230, 211;
+    --color-paper-cool: 232, 224, 213;
+
+    /* Borders / Dividers */
+    --color-border: 139, 115, 85;
+
+    /* =====================================================================
+     * Category 2: Fonts
+     * ===================================================================== */
+
+    --font-family-display: 'handwritten-serif';
+    --font-family-body: 'handwritten-sans';
+    --font-size-h1: 36px;
+    --font-size-h2: 24px;
+    --font-size-body: 16px;
+    --font-size-small: 12px;
+
+    /* =====================================================================
+     * Category 3: Spacing
+     * ===================================================================== */
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* =====================================================================
+     * Category 4: Transitions
+     * ===================================================================== */
+
+    --transition-fast: 100ms;
+    --transition-normal: 300ms;
+    --transition-slow: 500ms;
+
+    /* =====================================================================
+     * Category 5: Panel
+     * ===================================================================== */
+
+    --panel-bg-opacity: 0.92;
+    --panel-border-radius: 8px;
+    --panel-padding: var(--spacing-md);
+
+    /* =====================================================================
+     * Category 6: Buttons
+     * ===================================================================== */
+
+    --button-height: 44px;
+    --button-hover-brightness: 1.1;
+    --button-press-scale: 0.98;
+}
+
+/* =========================================================================
+ * Focus Indicator (ADR-0006 — keyboard navigation)
+ *
+ * Applied globally to any focused element. Uses accent color at 80% opacity
+ * for a visible but not overpowering outline. The outline follows focus as
+ * the player navigates with Arrow keys, Tab, or gamepad D-pad.
+ * ========================================================================= */
+
+*:focus {
+    outline-color: rgba(var(--color-accent), 0.8);
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+/* =========================================================================
+ * Panel Transitions (ADR-0006 S003 — fade-in / fade-out)
+ *
+ * Applied by PanelTransitionAnimator during PushPanel (fade-in, 0.3s)
+ * and PopPanel (fade-out, 0.2s). Uses GPU-accelerated opacity property.
+ * Durations sourced from --transition-normal and --transition-fast.
+ * ========================================================================= */
+
+.fade-in {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition-normal);
+    transition-timing-function: ease-out;
+}
+
+.fade-in--active {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: ease-in;
+}
+
+.fade-out--active {
+    opacity: 0;
+}
+
+/* =========================================================================
+ * Scene Fader (ADR-0004 — GPU-accelerated opacity transition)
+ *
+ * transition-duration is set via C# inline style at runtime so different
+ * scenes can have different fade durations. The USS class provides defaults.
+ * ========================================================================= */
+
+.scene-fader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}

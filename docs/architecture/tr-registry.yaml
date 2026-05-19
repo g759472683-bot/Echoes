@@ -24,33 +24,970 @@
 #
 # STATUS VALUES: active | deprecated | superseded-by: TR-[system]-NNN
 
-version: 1
-last_updated: ""
+version: 2
+last_updated: "2026-05-12"
 
-requirements: []
+requirements:
 
-# --- EXAMPLE ENTRIES (remove when first real entries are added) ---
-#
-# - id: TR-combat-001
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Player takes damage from enemies based on attack power minus defence"
-#   created: 2026-03-10
-#   revised: ""
-#   status: active
-#
-# - id: TR-combat-002
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Combo window timing is 0.4 seconds between hits"
-#   created: 2026-03-10
-#   revised: "2026-04-01"
-#   status: active
-#
-# - id: TR-combat-003
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Old damage formula using raw stats"
-#   created: 2026-03-10
-#   revised: ""
-#   status: superseded-by: TR-combat-001
+  # ==========================================================================
+  # Foundation Layer
+  # ==========================================================================
+
+  # --- Input System (#1) ---
+  - id: TR-input-system-001
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "Use Unity Input System package with two Action Maps (Gameplay/UI) with exclusive toggle"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-input-system-002
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "HoverDetector component polls mouse position and performs single Physics2D.OverlapPoint per frame on Interactable layer"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-input-system-003
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "Support runtime key rebinding via PerformInteractiveRebinding() with PlayerPrefs persistence"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-input-system-004
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "Device hot-plug detection with OnGamepadConnectionChanged event notification"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-input-system-005
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "Four input states: Gameplay, Menu, Rebinding, Inactive — with scene-load-triggered transitions"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-input-system-006
+    system: input-system
+    gdd: design/gdd/input-system.md
+    requirement: "Gamepad support limited to menu navigation (D-Pad, Left Stick, A, B, Start); check Gamepad.current == null to hide prompts"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Data Management (#2) ---
+  - id: TR-data-management-001
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "ScriptableObject-based two-tier structure: ChapterDefinition SO with AssetReferenceT<MemoryFragment>[] array"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-002
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "Task-based async API with three-state readiness model (Cached/Loading/NotRequested) and concurrent request dedup"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-003
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "Unity Addressables with 10 groups across Data_Ch01-04, Art_Ch01-04, Shared_UI, Shared_Audio"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-004
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "Preload next chapter illustrations via DownloadDependenciesAsync when ≤3 fragments remain"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-005
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "Three-layer data validation: editor Inspector, build-time Addressables cross-check, runtime descriptive exceptions"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-006
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "All Addressables load calls wrapped in try/catch (Unity 6.2+ throws exceptions on failure)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-data-management-007
+    system: data-management
+    gdd: design/gdd/data-management.md
+    requirement: "Metadata load time <2 seconds; fragment definition query <50ms from memory"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Audio System (#3) ---
+  - id: TR-audio-system-001
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Unity Audio Mixer with 4-layer routing: Master → SFX / Music (Music_A+Music_B) / Ambience"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-002
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Music crossfade via Snapshot system with two Mixer Snapshots and configurable fadeTime"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-003
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "SFX 10-source object pool with priority stealing (closest-to-end, lowest-volume, earliest-started)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-004
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Volume settings (Master/SFX/Music/Ambience) persisted to PlayerPrefs immediately on change"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-005
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Audio ducking: SFX playing → Music -10dB, Ambience -6dB (attack 50ms, release 500ms)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-006
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Single persistent AudioListener (DontDestroyOnLoad); disable extra AudioListeners in loaded scenes"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-audio-system-007
+    system: audio-system
+    gdd: design/gdd/audio-system.md
+    requirement: "Pause all audio via AudioListener.pause = true when game window loses focus"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Localization (#4) ---
+  - id: TR-localization-001
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "Use Unity Localization Package with zh-Hans (default) + en locales and en→zh-Hans fallback chain"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-localization-002
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "1+N StringTable design: UI_Shared (persistent) + Narrative_Ch01-04 (per-chapter, loaded on chapter entry)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-localization-003
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "Runtime locale switching via LocalizationSettings.SelectedLocale triggers auto-refresh of all LocalizedString components"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-localization-004
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "MemoryFragment SO stores TableReference + TableEntryReference (not raw strings) for narrative text"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-localization-005
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "MissingTranslationEvent callback logs warning; never display raw key name to player (show ellipsis instead)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-localization-006
+    system: localization
+    gdd: design/gdd/localization.md
+    requirement: "OnLocaleChanged event for UI refresh notification, following ADR-0001 static event pattern"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- UI Framework (#5) ---
+  - id: TR-ui-framework-001
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "Use Unity UI Toolkit exclusively (UGUI deprecated); UXML structure + USS styles for all panels"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-ui-framework-002
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "LIFO UIPanelStack (max depth 10) with PushPanel/PopPanel/ReplaceTop and HUD as persistent layer"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-ui-framework-003
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "Keyboard navigation via FocusController + UI Action Map (Navigate/Confirm/Cancel/TabNext/TabPrevious)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-ui-framework-004
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "Theme.uss CSS variables across 6 categories (--color-, --font-, --spacing-, --transition-, --panel-, --button-)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-ui-framework-005
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "Panel transitions via opacity fade-in/fade-out using USS transition property (0.3s ease-out / 0.2s ease-in)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-ui-framework-006
+    system: ui-framework
+    gdd: design/gdd/ui-framework.md
+    requirement: "Auto-focus first interactable element on panel open; restore last focused position on PopPanel"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Scene Management (#6) ---
+  - id: TR-scene-management-001
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "3-scene architecture (Boot/MainMenu/Game) with Addressables content injection; Game scene loaded once"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-002
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "Transition state machine with SceneFader full-screen ink-mask VisualElement and UI Toolkit opacity transitions"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-003
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "OnFragmentTransitionStarted(chapterKey, fragmentId) and OnFragmentTransitioned(chapterKey, fragmentId) static events"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-004
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "Preload trigger when remaining fragments ≤3 — parallel preload via Task.WhenAll for illustrations + audio"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-005
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "Fragment transition 1.0s (0.5s fade-out + 0.5s fade-in); chapter transition 1.0s fade-out + load + 1.0s fade-in"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-006
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "During all transitions, set all Action Maps to Inactive to prevent accidental input"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scene-management-007
+    system: scene-management
+    gdd: design/gdd/scene-management.md
+    requirement: "Error recovery: fragment load failure shows error with retry/return; chapter failure shows retry/return-to-menu; scene failure shows exit"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Save/Load System (#7) ---
+  - id: TR-save-load-system-001
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "3 save slots (save_01/save_02/auto_save) at Application.persistentDataPath/Saves/[slot_id].sav"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-002
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "SHA-256 checksum over all fields except Checksum itself — computed on save, validated on load"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-003
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "Atomic file write: serialize to .sav.tmp, then File.Move(tmp, final, overwrite: true)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-004
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "Version migration chain (Migrate_V1_to_V2, etc.) triggered when SaveData.Version < currentVersion"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-005
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "SaveData aggregates: chapter/fragment progress, ChangeOverlay, CrossChapterFlags, volume settings, locale, unlocked endings"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-006
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "Auto-save triggers: chapter start, critical choice (30s debounce), chapter complete, OnApplicationQuit — silent, no notification"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-save-load-system-007
+    system: save-load-system
+    gdd: design/gdd/save-load-system.md
+    requirement: "Save operation complete in <200ms on PC; prevent concurrent save/load operations"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # ==========================================================================
+  # Gameplay Layer
+  # ==========================================================================
+
+  # --- Memory Fragment Data Model (#8) ---
+  - id: TR-memory-fragment-001
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "MemoryFragment ScriptableObject with 8 categories: Core Identity, Visual Layers, Interactive Objects, Emotional Tags, Choice Branches, Content Changes, Explicit Associations, Ending Triggers"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-fragment-002
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "6 ContentChange types: ToggleVisualLayer, SetObjectState, SetTextContent, ModifyTagWeight, UnlockAssociation, SetFlag"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-fragment-003
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "ConditionGroup with All/Any/Not combinators + 6 leaf conditions, max depth 3, [SerializeReference] for polymorphic serialization"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-fragment-004
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "InteractiveObject with hitbox (HitboxCenter + HitboxSize), InteractionType enum (Touch/Drag/Hover/Examine), InteractCondition ConditionGroup"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-fragment-005
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "Cross-fragment ContentChange targets validated to same chapter (ChapterId matching); cross-chapter via SetFlag + ConditionGroup"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-fragment-006
+    system: memory-fragment
+    gdd: design/gdd/memory-fragment-data-model.md
+    requirement: "Single fragment SO 5-10KB; 60-100 fragment metadata <1MB total; object count limit 2-5 per fragment MVP"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Micro-Animation System (#9) ---
+  - id: TR-micro-animation-001
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "Three animation categories: Ambient (looping), Triggered (one-shot 0.6-2.5s), Feedback (hover/click)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-micro-animation-002
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "Custom MicroTween struct (zero heap allocation) with SineIn/SineOut/EaseOutCubic/EaseOutElastic/EaseOutBounce — no external tween library"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-micro-animation-003
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "GPU-driven animations via Shader Graph + MaterialPropertyBlock.SetFloat; CPU only runs MicroTween updates"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-micro-animation-004
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "Three-tier performance degradation: High (<14ms frame) → Medium (30fps ambient) → Low (pause ambient) → Minimal (feedback only)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-micro-animation-005
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "L1/L2/L3 vermilion ink dot glow system: static 4-6px dot → breathing pulse (2.5s sine) → warm inner glow (+300K)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-micro-animation-006
+    system: micro-animation
+    gdd: design/gdd/micro-animation-system.md
+    requirement: "Performance budget <2ms per fragment per frame; <1ms/frame total budget target"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Emotional Tag System (#10) ---
+  - id: TR-emotional-tag-001
+    system: emotional-tag
+    gdd: design/gdd/emotional-tag-system.md
+    requirement: "EmotionalTagCatalog ScriptableObject with 15-20 tags across 8 categories (Joy/Sadness/Love/Fear/Anger/Wonder/Melancholy/Peace)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-emotional-tag-002
+    system: emotional-tag
+    gdd: design/gdd/emotional-tag-system.md
+    requirement: "Tag hierarchy max 2 levels (root + one child); QueryFragmentsByTag auto-includes child tags"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-emotional-tag-003
+    system: emotional-tag
+    gdd: design/gdd/emotional-tag-system.md
+    requirement: "Runtime tag weight = BaseWeight × ModifyTagWeight overlay effects, clamped to [0.0, 1.0]"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-emotional-tag-004
+    system: emotional-tag
+    gdd: design/gdd/emotional-tag-system.md
+    requirement: "TagSimilarityMatrix N×N precomputed ScriptableObject for web association engine factor A"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-emotional-tag-005
+    system: emotional-tag
+    gdd: design/gdd/emotional-tag-system.md
+    requirement: "Editor Emotional Tag Browser window with tree view, tag rename propagation, orphan detection, safe delete workflow"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Scroll Interaction System (#11) ---
+  - id: TR-scroll-interaction-001
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "InteractionManager singleton MonoBehaviour using Physics2D.OverlapPoint on Interactable layer each frame (non-alloc)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scroll-interaction-002
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "10 public static C# events: OnHoverEnter, OnHoverExit, OnInteract, OnDragStart, OnDragComplete, OnDragCancel, OnChoiceSelected, OnChoiceHover, OnRevealObject, OnShowText"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scroll-interaction-003
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "Drag threshold: 5px (distinguish from click), 30px (completion), 0.3s spring-back (EaseOutCubic) on incomplete"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scroll-interaction-004
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "Interaction state machine: Normal/Dragging/ChoicePresenting/Examining/Blocked with exclusive state transitions"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scroll-interaction-005
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "ChoiceGroup with MaxSelections=1 and single available option auto-applies without showing choice panel"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-scroll-interaction-006
+    system: scroll-interaction
+    gdd: design/gdd/scroll-interaction-system.md
+    requirement: "During fragment transitions, Action Map set to Inactive and all interaction input ignored"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Memory Change Tracking (#12) ---
+  - id: TR-memory-change-tracking-001
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "ChangeTracker singleton maintaining _overlay Dictionary<(fragmentId, choiceId), ContentOverrides>"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-change-tracking-002
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "GetCurrentState(fragmentId) merges base SO + overlay sorted by OrderIndex, returning ResolvedFragmentState"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-change-tracking-003
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "ConditionGroup runtime evaluation engine: All/Any/Not combinators + 6 leaf conditions (Always, ChoiceMade, FlagSet, ObjectStateIs, VisitedFragment, ChapterCompleted)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-change-tracking-004
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "OnOverlayChanged(targetFragmentId) event fires after ApplyChanges for same-frame visual refresh"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-change-tracking-005
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "IsRepeatable=true choices overwrite overlay entry but append independent _changeLog entries"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-memory-change-tracking-006
+    system: memory-change-tracking
+    gdd: design/gdd/memory-change-tracking.md
+    requirement: "Save/load: serialize _overlay, _flags, _visitedFragments, _completedChapters; restore all and reset OverlayVersion"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Web Association Engine (#13) ---
+  - id: TR-web-association-001
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Pure C# class (no MonoBehaviour), stateless — ComputeAssociations is pure function with same inputs → same outputs"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-web-association-002
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Four-factor formula: compositeScore = (A×0.6 + B×0.4) × C × D where A=TagSimilarity, B=ExplicitWeight, C=RhythmPenalty, D=DiscoveryBoost"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-web-association-003
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Candidate pool: same-chapter, unlocked, conditions met, exclude self; MVP chapter-only"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-web-association-004
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Rhythm penalty sliding window K=4; same category penalty factors pos1=0.70, pos2=0.55, pos3=0.40, pos4=0.25"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-web-association-005
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Visual grading 4 levels: Strong (≥0.60), Medium (≥0.30), Faint (≥0.10), Trace (<0.10)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-web-association-006
+    system: web-association
+    gdd: design/gdd/web-association-engine.md
+    requirement: "Return top-5 candidates sorted by compositeScore descending; minimum 3 (except B=-1.0 exclusion)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Multi-Ending System (#14) ---
+  - id: TR-multi-ending-001
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "Three-stage ending judgment: collect triggers → IsEssential gate → accumulate ContributionWeight → EmotionalAffinity path bonus → threshold → tie-breaking"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-multi-ending-002
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "IsEssential=true trigger with EvaluateCondition=false disqualifies entire ending"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-multi-ending-003
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "UnlockedEndingIds HashSet with union semantics — new endings added, old retained, never removed"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-multi-ending-004
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "Tie-breaking: 1) more satisfied IsEssential, 2) novelty (not in UnlockedEndingIds), 3) definition order"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-multi-ending-005
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "Each chapter must have exactly one IsDefault=true ending with MinimumScore=0.0 as fallback"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-multi-ending-006
+    system: multi-ending
+    gdd: design/gdd/multi-ending-system.md
+    requirement: "ResolveEnding re-evaluates every call (no caching) — player can change choices and retrigger different endings"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # ==========================================================================
+  # Progression Layer
+  # ==========================================================================
+
+  # --- Chapter Management (#15) ---
+  - id: TR-chapter-management-001
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "ChapterDefinition ScriptableObject with ChapterKey, OrderIndex, EntryFragmentId, Endings[], CompletionRatio (default 0.6)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-chapter-management-002
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "3-state machine: IDLE → IN_CHAPTER → TRANSITIONING; TransitionToFragment calls rejected when CurrentState != IN_CHAPTER"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-chapter-management-003
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "Chapter completion detection: all-visited OR (visitedRatio ≥ CompletionRatio AND bestCandidateScore < 0.30)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-chapter-management-004
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "Chapter replay preserves overlay + flags but resets visit records, recent history, and preload trigger"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-chapter-management-005
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "Linear chapter unlock with union semantics — completing chapter N permanently unlocks N+1"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-chapter-management-006
+    system: chapter-management
+    gdd: design/gdd/chapter-management.md
+    requirement: "5-step chapter completion: ResolveEnding → update tracking → auto_save → TransitionToChapterAsync → OnChapterStarted"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Cross-Chapter State Tracking (#16) ---
+  - id: TR-cross-chapter-state-001
+    system: cross-chapter-state
+    gdd: design/gdd/cross-chapter-state-tracking.md
+    requirement: "CrossChapterFlagRegistry ScriptableObject with FlagId, SetInChapter, SetInFragmentId, IsImmutable, DefaultValue, ConsumedBy"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-cross-chapter-state-002
+    system: cross-chapter-state
+    gdd: design/gdd/cross-chapter-state-tracking.md
+    requirement: "IsImmutable=true flags reject SetFlag(false) with Warning log — permanently locked once set"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-cross-chapter-state-003
+    system: cross-chapter-state
+    gdd: design/gdd/cross-chapter-state-tracking.md
+    requirement: "InitializeAllFlags sets all registry flags to DefaultValue via ChangeTracker.SetFlagRaw on new game"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-cross-chapter-state-004
+    system: cross-chapter-state
+    gdd: design/gdd/cross-chapter-state-tracking.md
+    requirement: "GetPersistableFlags/RestoreFlags for save/load bridge; orphan flags preserved but harmless"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-cross-chapter-state-005
+    system: cross-chapter-state
+    gdd: design/gdd/cross-chapter-state-tracking.md
+    requirement: "OnChapterReplayStarted event activates IsImmutable flag protection logic"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # ==========================================================================
+  # UI Layer
+  # ==========================================================================
+
+  # --- In-Game HUD (#17) ---
+  - id: TR-in-game-hud-001
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "UI Toolkit VisualElement tree on Game scene UIDocument: #fragment-text-overlay, #choice-panel, #association-paths, #chapter-progress, #interaction-hint"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-in-game-hud-002
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "MVVM data binding via INotifyBindablePropertyChanged for AssociationPathsDataSource and ChapterProgressDataSource"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-in-game-hud-003
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "Association path visual grading: Strong (thick ink) / Medium (semi-transparent) / Faint (light) / Trace (dashed)"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-in-game-hud-004
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "Chapter progress as horizontal ink dot row: visited=solid cinnabar, unvisited=hollow light ink, current=pulsing L2"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-in-game-hud-005
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "Fragment text overlay auto-fades after 4.0s (configurable 2.0-8.0s) with picking-mode: ignore"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-in-game-hud-006
+    system: in-game-hud
+    gdd: design/gdd/in-game-hud.md
+    requirement: "HUD visibility rule table: Gameplay=visible, ChoicePanel=only choice visible, Transitioning=hidden, UIPanel=hidden"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Interaction Feedback (#18) ---
+  - id: TR-interaction-feedback-001
+    system: interaction-feedback
+    gdd: design/gdd/interaction-feedback.md
+    requirement: "Subscribe to 10 InteractionManager static events + SceneManager OnFragmentTransitionStarted/Transitioned"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-interaction-feedback-002
+    system: interaction-feedback
+    gdd: design/gdd/interaction-feedback.md
+    requirement: "Event→Feedback mapping table: 10 interaction events → visual (MicroAnimationManager) + audio (AudioManager) responses"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-interaction-feedback-003
+    system: interaction-feedback
+    gdd: design/gdd/interaction-feedback.md
+    requirement: "Feedback priority: choice confirm > drag complete > interact > hover; all suppressed during fragment transitions"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-interaction-feedback-004
+    system: interaction-feedback
+    gdd: design/gdd/interaction-feedback.md
+    requirement: "Debounce 0.3s (configurable 0.2-0.5s) on same (objectId, eventName); audio plays to completion, visual interrupted"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-interaction-feedback-005
+    system: interaction-feedback
+    gdd: design/gdd/interaction-feedback.md
+    requirement: "_feedbackSuppressed flag set true during fragment transitions; purely event-driven, no Update()"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  # --- Main Menu (#19) ---
+  - id: TR-main-menu-001
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "MainMenu scene UIDocument with 5 VisualElement trees: #title-screen, #pause-menu, #settings-panel, #save-load-panel, #modal-dialog"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-002
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "Panel stack management delegated to UI Framework (#5) PushPanel/PopPanel; MainMenuController defines button behaviors only"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-003
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "Pause: Time.timeScale = 0 freezes MonoBehaviour Updates while UI Toolkit event system remains responsive"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-004
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "Continue button visible only when SaveManager.HasAnySave() returns true; hidden (not disabled) when no save exists"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-005
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "Save/Load panel dual-mode (Save/Load) via _saveLoadMode enum set before PushPanel; mode immutable during display"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-006
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "5 confirmation dialog scenarios with localized messages: new_game, overwrite, load_in_game, return_to_title, quit"
+    created: 2026-05-12
+    revised: ""
+    status: active
+
+  - id: TR-main-menu-007
+    system: main-menu
+    gdd: design/gdd/main-menu.md
+    requirement: "Full keyboard navigation: Arrow Keys/Tab for focus, Enter for confirm, Escape for Cancel/PopPanel; auto-focus first element on panel open"
+    created: 2026-05-12
+    revised: ""
+    status: active

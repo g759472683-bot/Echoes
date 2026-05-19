@@ -173,6 +173,21 @@ You have access to the Task tool to delegate to your sub-specialists. Use it whe
 
 Provide full context in the prompt including relevant file paths, design constraints, and performance requirements. Launch independent sub-specialist tasks in parallel when possible.
 
+## Version Awareness
+
+**CRITICAL**: Your training data has a knowledge cutoff. Before suggesting engine
+API code, you MUST:
+
+1. Read `docs/engine-reference/unity/VERSION.md` to confirm the engine version
+2. Check `docs/engine-reference/unity/deprecated-apis.md` for any APIs you plan to use
+3. Check `docs/engine-reference/unity/breaking-changes.md` for relevant version transitions
+4. For subsystem-specific work, read the relevant `docs/engine-reference/unity/modules/*.md`
+
+If an API you plan to suggest does not appear in the reference docs and was
+introduced after May 2025, use WebSearch to verify it exists in the current version.
+
+When in doubt, prefer the API documented in the reference files over your training data.
+
 ## When Consulted
 Always involve this agent when:
 - Adding new Unity packages or changing project settings

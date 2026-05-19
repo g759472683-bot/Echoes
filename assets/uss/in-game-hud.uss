@@ -1,0 +1,221 @@
+/* =============================================================================
+   In-Game HUD Stylesheet — USS
+   References Theme.uss custom properties for visual consistency (ADR-0006).
+
+   Key colors:
+     - Vermilion ink: #C04040 (visited dots, target indicators)
+     - Cinnabar ink: rgb(180, 60, 50) (choice option dots)
+     - Ink black: rgba(15, 10, 5, 0.85) (text, ink trails)
+   ============================================================================= */
+
+/* ---- Root Container ---- */
+.hud-root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    flex-direction: column;
+}
+
+/* ---- Fragment Text Overlay (Rule 4) ---- */
+.fragment-text-overlay {
+    position: absolute;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    pointer-events: none;
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.fragment-text-overlay.fade-out {
+    opacity: 0;
+}
+
+.fragment-text {
+    color: rgba(15, 10, 5, 0.85);
+    font-size: 16px;
+    white-space: normal;
+    -unity-font-style: normal;
+    pointer-events: none;
+}
+
+/* ---- Choice Panel (Rule 2) ---- */
+.choice-panel {
+    position: absolute;
+    width: 300px;
+    background-color: rgba(245, 240, 230, 0.92);
+    border-color: rgba(180, 60, 50, 0.4);
+    border-width: 1px;
+    border-radius: 4px;
+    padding: 12px;
+    pointer-events: auto;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+.choice-panel.fade-out {
+    opacity: 0;
+}
+
+.choice-prompt {
+    color: rgba(15, 10, 5, 0.7);
+    font-size: 13px;
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+.choice-options {
+    flex-direction: column;
+}
+
+.choice-option {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 2px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0);
+    transition-property: background-color;
+    transition-duration: 0.15s;
+    cursor: pointer;
+}
+
+.choice-option:hover {
+    background-color: rgba(200, 180, 160, 0.25);
+}
+
+.choice-option:focus {
+    background-color: rgba(200, 180, 160, 0.35);
+}
+
+.choice-text {
+    color: rgba(15, 10, 5, 0.85);
+    font-size: 15px;
+    white-space: normal;
+    flex-grow: 1;
+}
+
+/* ---- Association Paths (Rule 3) ---- */
+.association-paths {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.path-candidate {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.path-candidate:hover .ink-trail {
+    opacity: 1;
+}
+
+.path-candidate:hover .target-indicator {
+    background-color: rgba(220, 80, 60, 1);
+}
+
+.path-candidate:focus {
+    outline-color: rgba(192, 64, 64, 0.5);
+    outline-width: 1px;
+}
+
+.ink-trail {
+    position: absolute;
+    background-color: rgba(15, 10, 5, 0.5);
+    height: 2px;
+    transform-origin: left center;
+}
+
+.target-indicator {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(192, 64, 64, 0.8);
+    border-color: rgba(192, 64, 64, 0.6);
+    border-width: 1px;
+}
+
+/* ---- Chapter Progress (Rule 5) ---- */
+.chapter-progress {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: rgba(245, 240, 230, 0.5);
+    border-radius: 8px;
+}
+
+.chapter-name {
+    color: rgba(15, 10, 5, 0.6);
+    font-size: 11px;
+    margin-right: 8px;
+}
+
+.fragment-count {
+    flex-direction: row;
+    align-items: center;
+}
+
+.chapter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.dot-visited {
+    background-color: #C04040;
+    border-width: 0;
+}
+
+.dot-unvisited {
+    background-color: transparent;
+    border-color: rgba(15, 10, 5, 0.25);
+    border-width: 1px;
+}
+
+.dot-current {
+    /* L2 pulse — driven by USS animation */
+    background-color: #C04040;
+    border-width: 0;
+    animation-name: dot-pulse;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes dot-pulse {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.75; }
+    100% { opacity: 1; }
+}
+
+/* ---- Interaction Hint (Rule 6) ---- */
+.interaction-hint {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.hint-text {
+    color: rgba(15, 10, 5, 0.75);
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+}

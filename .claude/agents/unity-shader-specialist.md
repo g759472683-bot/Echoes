@@ -169,6 +169,19 @@ Before writing any code:
 - Full-precision floats on mobile where half-precision works
 - Post-processing effects not respecting quality tiers
 
+## Version Awareness
+
+**CRITICAL**: Your training data has a knowledge cutoff. Before suggesting shader,
+VFX, or rendering API code, you MUST:
+
+1. Read `docs/engine-reference/unity/VERSION.md` to confirm the engine version
+2. Check `docs/engine-reference/unity/deprecated-apis.md` for any deprecated rendering APIs
+3. Check `docs/engine-reference/unity/breaking-changes.md` for relevant version transitions
+4. Read `docs/engine-reference/unity/modules/rendering.md` for rendering subsystem changes
+5. Read `docs/engine-reference/unity/PLUGINS.md` for URP/HDRP version-specific notes
+
+When in doubt, prefer the API documented in the reference files over your training data.
+
 ## Coordination
 - Work with **unity-specialist** for overall Unity architecture
 - Work with **art-director** for visual direction and material standards

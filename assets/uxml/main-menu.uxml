@@ -1,0 +1,113 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <!--
+    MainMenu UIDocument — 5-panel layout
+    Story: main-menu S001-S004
+    Engine: Unity 6.3 LTS (UI Toolkit)
+
+    Panel hierarchy:
+      1. #title-screen      — Title screen with logo, menu buttons, background
+      2. #pause-menu         — Pause overlay with resume/save/load/settings/return
+      3. #settings-panel     — Audio sliders + language dropdown
+      4. #save-load-panel    — 3 save slots, dual Save/Load mode
+      5. #modal-dialog       — Confirmation overlay with message + confirm/cancel
+  -->
+
+  <!-- ========================================================================
+       Panel 1: Title Screen
+       ======================================================================== -->
+  <VisualElement name="title-screen">
+    <VisualElement name="game-logo">
+      <Label name="game-title" text="回响" />
+    </VisualElement>
+
+    <VisualElement name="menu-buttons">
+      <ui:Button name="btn-new-game" text="新游戏" />
+      <ui:Button name="btn-continue" text="继续" />
+      <ui:Button name="btn-load-game" text="加载游戏" />
+      <ui:Button name="btn-settings" text="设置" />
+      <ui:Button name="btn-quit" text="退出" />
+    </VisualElement>
+
+    <VisualElement name="background-painting" />
+  </VisualElement>
+
+  <!-- ========================================================================
+       Panel 2: Pause Menu
+       ======================================================================== -->
+  <VisualElement name="pause-menu">
+    <VisualElement name="pause-overlay" />
+    <VisualElement name="pause-menu-buttons">
+      <ui:Button name="btn-resume" text="继续" />
+      <ui:Button name="btn-save-game" text="保存游戏" />
+      <ui:Button name="btn-load-game-pause" text="加载游戏" />
+      <ui:Button name="btn-settings-pause" text="设置" />
+      <ui:Button name="btn-return-to-title" text="返回标题画面" />
+    </VisualElement>
+  </VisualElement>
+
+  <!-- ========================================================================
+       Panel 3: Settings Panel
+       ======================================================================== -->
+  <VisualElement name="settings-panel">
+    <Label name="settings-title" text="设置" />
+
+    <VisualElement name="audio-section">
+      <Label name="audio-section-title" text="音量" />
+
+      <VisualElement name="slider-row-master" class="slider-row">
+        <Label name="label-master" text="主音量" />
+        <ui:Slider name="slider-master" low-value="0" high-value="1" />
+      </VisualElement>
+
+      <VisualElement name="slider-row-sfx" class="slider-row">
+        <Label name="label-sfx" text="音效" />
+        <ui:Slider name="slider-sfx" low-value="0" high-value="1" />
+      </VisualElement>
+
+      <VisualElement name="slider-row-music" class="slider-row">
+        <Label name="label-music" text="音乐" />
+        <ui:Slider name="slider-music" low-value="0" high-value="1" />
+      </VisualElement>
+
+      <VisualElement name="slider-row-ambience" class="slider-row">
+        <Label name="label-ambience" text="环境音" />
+        <ui:Slider name="slider-ambience" low-value="0" high-value="1" />
+      </VisualElement>
+    </VisualElement>
+
+    <VisualElement name="language-section">
+      <Label name="language-section-title" text="语言" />
+      <ui:DropdownField name="dropdown-language" />
+    </VisualElement>
+
+    <ui:Button name="btn-settings-back" text="返回" />
+  </VisualElement>
+
+  <!-- ========================================================================
+       Panel 4: Save/Load Panel
+       ======================================================================== -->
+  <VisualElement name="save-load-panel">
+    <Label name="panel-title" text="保存游戏" />
+    <VisualElement name="slot-list">
+      <VisualElement name="slot-01" class="save-slot" />
+      <VisualElement name="slot-02" class="save-slot" />
+      <VisualElement name="slot-auto" class="save-slot" />
+    </VisualElement>
+    <ui:Button name="btn-save-load-back" text="返回" />
+  </VisualElement>
+
+  <!-- ========================================================================
+       Panel 5: Modal Confirmation Dialog
+       ======================================================================== -->
+  <VisualElement name="modal-dialog">
+    <VisualElement name="modal-overlay" />
+    <VisualElement name="modal-content">
+      <Label name="modal-message" text="" />
+      <VisualElement name="modal-buttons">
+        <ui:Button name="btn-modal-confirm" text="确定" />
+        <ui:Button name="btn-modal-cancel" text="取消" />
+      </VisualElement>
+    </VisualElement>
+  </VisualElement>
+
+</ui:UXML>
