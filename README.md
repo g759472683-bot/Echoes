@@ -1,312 +1,178 @@
 <p align="center">
-  <h1 align="center">Claude Code Game Studios</h1>
+  <h1 align="center">回响 (Echoes)</h1>
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    触碰记忆，重写真相。
     <br />
-    49 agents. 72 skills. One coordinated AI team.
+    A hand-drawn 2D narrative exploration game built in Unity 6.3 LTS.
   </p>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-49-blueviolet" alt="49 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-72-green" alt="72 Skills"></a>
-  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-12-orange" alt="12 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
-  <a href="https://www.buymeacoffee.com/donchitos3"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20this%20project-FFDD00?logo=buymeacoffee&logoColor=black" alt="Buy Me a Coffee"></a>
-  <a href="https://github.com/sponsors/Donchitos"><img src="https://img.shields.io/badge/GitHub%20Sponsors-Support%20this%20project-ea4aaa?logo=githubsponsors&logoColor=white" alt="GitHub Sponsors"></a>
+  <a href="#"><img src="https://img.shields.io/badge/engine-Unity%206.3%20LTS-222324?logo=unity" alt="Unity 6.3 LTS"></a>
+  <a href="#"><img src="https://img.shields.io/badge/language-C%23-239120?logo=csharp" alt="C#"></a>
+  <a href="#"><img src="https://img.shields.io/badge/stage-Pre--Production-orange" alt="Pre-Production"></a>
+  <a href="#"><img src="https://img.shields.io/badge/systems-19%2F19%20MVP-brightgreen" alt="19/19 MVP Systems"></a>
+  <a href="#"><img src="https://img.shields.io/badge/tests-79%20files-blueviolet" alt="79 Test Files"></a>
 </p>
 
 ---
 
-## Why This Exists
+> 你是一个游魂，漂浮在自己活过的一生中。记忆像散落的画卷碎片——触碰、选择、重写它们。
+> 每一次回溯，碎片重新排列，真相也随之改变。有些结局，藏在你从未踏足的关联里。
 
-Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
+**Echoes** is a hand-drawn 2D narrative exploration game. You drift through memory fragments as a wandering spirit — touching objects in painted scrolls rewrites the memories themselves. There is no "correct" ending, only different truths.
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 49 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
-
-The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
-
----
-
-## Table of Contents
-
-- [What's Included](#whats-included)
-- [Studio Hierarchy](#studio-hierarchy)
-- [Slash Commands](#slash-commands)
-- [Getting Started](#getting-started)
-- [Upgrading](#upgrading)
-- [Project Structure](#project-structure)
-- [How It Works](#how-it-works)
-- [Design Philosophy](#design-philosophy)
-- [Customization](#customization)
-- [Platform Support](#platform-support)
-- [Community](#community)
-- [Supporting This Project](#supporting-this-project)
-- [License](#license)
+| | |
+|---|---|
+| **Genre** | Narrative Exploration / Memory Puzzle |
+| **Platform** | PC (Steam / Epic) |
+| **Engine** | Unity 6.3 LTS (URP 2D Renderer) |
+| **Language** | C# |
+| **Stage** | Pre-Production |
+| **MVP Scope** | 2 chapters, ~30 memory fragments, 1 hidden ending |
+| **Full Vision** | 4 chapters, 60–100 fragments, 3 hidden endings |
 
 ---
 
-## What's Included
+## Design Pillars
 
-| Category | Count | Description |
-|----------|-------|-------------|
-| **Agents** | 49 | Specialized subagents across design, programming, art, audio, narrative, QA, and production |
-| **Skills** | 72 | Slash commands for every workflow phase (`/start`, `/design-system`, `/create-epics`, `/create-stories`, `/dev-story`, `/story-done`, etc.) |
-| **Hooks** | 12 | Automated validation on commits, pushes, asset changes, session lifecycle, agent audit trail, and gap detection |
-| **Rules** | 11 | Path-scoped coding standards enforced when editing gameplay, engine, AI, UI, network code, and more |
-| **Templates** | 39 | Document templates for GDDs, UX specs, ADRs, sprint plans, HUD design, accessibility, and more |
+1. **Choice is Rewriting** — Choices don't pick a path; they change the memory *itself*
+2. **Imperfection is Power** — No "perfect" ending exists. The most moving endings are the hardest to reach
+3. **A Web, Not a Book** — Fragments connect through emotional association, not chronological order
+4. **Breathing Scrolls** — Every frame should be a painting you could hang on a wall
 
-## Studio Hierarchy
+### Inspiration
 
-Agents are organized into three tiers, matching how real studios operate:
+*What Remains of Edith Finch* · *Disco Elysium* · *NieR: Automata*
+Chinese ink wash painting · Wong Kar-wai films · Proust
+
+---
+
+## Architecture
 
 ```
-Tier 1 — Directors (Opus)
-  creative-director    technical-director    producer
-
-Tier 2 — Department Leads (Sonnet)
-  game-designer        lead-programmer       art-director
-  audio-director       narrative-director    qa-lead
-  release-manager      localization-lead
-
-Tier 3 — Specialists (Sonnet/Haiku)
-  gameplay-programmer  engine-programmer     ai-programmer
-  network-programmer   tools-programmer      ui-programmer
-  systems-designer     level-designer        economy-designer
-  technical-artist     sound-designer        writer
-  world-builder        ux-designer           prototyper
-  performance-analyst  devops-engineer       analytics-engineer
-  security-engineer    qa-tester             accessibility-specialist
-  live-ops-designer    community-manager
+┌──────────────────────────────────────────┐
+│  PRESENTATION                            │
+│  Micro-Animation · HUD · Feedback        │
+│  Main Menu · Audio                       │
+├──────────────────────────────────────────┤
+│  FEATURE                                 │
+│  Emotional Tags · Scroll Interaction     │
+│  Change Tracking · Web Association       │
+│  Multi-Ending · Chapter Management       │
+│  Cross-Chapter State                     │
+├──────────────────────────────────────────┤
+│  CORE                                    │
+│  Input System · Memory Fragment Model    │
+│  UI Framework                            │
+├──────────────────────────────────────────┤
+│  FOUNDATION                              │
+│  Data Management · Scene Management      │
+│  Save/Load · Localization                │
+└──────────────────────────────────────────┘
 ```
 
-### Engine Specialists
+**19 systems** across 4 layers, governed by **18 Architecture Decision Records** (ADR-0001 through ADR-0018).
 
-The template includes agent sets for all three major engines. Use the set that matches your project:
+### Key Systems
 
-| Engine | Lead Agent | Sub-Specialists |
-|--------|-----------|-----------------|
-| **Godot 4** | `godot-specialist` | GDScript, Shaders, GDExtension |
-| **Unity** | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit |
-| **Unreal Engine 5** | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI |
+| System | What It Does |
+|---|---|
+| **Web Association Engine** | Memory fragments connect through emotional tag similarity — real-time candidate ranking |
+| **Change Tracking** | Overlay pattern rewrites fragment content without mutating source data |
+| **Scroll Interaction** | Physics-based 2D interaction: touch, drag, hover, examine |
+| **Multi-Ending** | 2–5 endings per chapter; hidden endings require cross-chapter chains |
+| **Chapter Manager** | 3-state machine, two-part completion detection, replay semantics |
 
-## Slash Commands
+---
 
-Type `/` in Claude Code to access all 72 skills:
+## Project Structure
 
-**Onboarding & Navigation**
-`/start` `/help` `/project-stage-detect` `/setup-engine` `/adopt`
+```
+├── assets/Scripts/           # C# code (Unity assemblies)
+│   ├── Core/                 # Echoes.Core — 114 source files
+│   └── Editor/               # Echoes.Editor — 5 source files
+├── assets/UI/                # UI Toolkit Theme.uss
+├── assets/uss/               # UI stylesheets
+├── assets/uxml/              # UI layout files
+├── design/gdd/               # 22 game design documents
+├── docs/architecture/        # 18 ADRs + architecture spec + traceability
+├── tests/                    # 79 test files
+│   ├── unit/                 # 48 unit test files
+│   └── integration/          # 21 integration test files
+├── production/epics/         # 19 epics with 79 stories
+└── .github/workflows/        # CI (Unity Test Framework)
+```
 
-**Game Design**
-`/brainstorm` `/map-systems` `/design-system` `/quick-design` `/review-all-gdds` `/propagate-design-change`
+---
 
-**Art & Assets**
-`/art-bible` `/asset-spec` `/asset-audit`
+## Tech Stack
 
-**UX & Interface Design**
-`/ux-design` `/ux-review`
+| Layer | Technology |
+|---|---|
+| Engine | Unity 6.3 LTS (`6000.3.45f1`) |
+| Rendering | URP 2D Renderer |
+| UI | UI Toolkit (UXML + USS) |
+| Input | Unity Input System 1.13 |
+| Assets | Addressables 2.3 |
+| Localization | Unity Localization 1.5 |
+| Testing | Unity Test Framework 1.4 |
+| CI | GitHub Actions (`game-ci/unity-test-runner@v4`) |
 
-**Architecture**
-`/create-architecture` `/architecture-decision` `/architecture-review` `/create-control-manifest`
-
-**Stories & Sprints**
-`/create-epics` `/create-stories` `/dev-story` `/sprint-plan` `/sprint-status` `/story-readiness` `/story-done` `/estimate`
-
-**Reviews & Analysis**
-`/design-review` `/code-review` `/balance-check` `/content-audit` `/scope-check` `/perf-profile` `/tech-debt` `/gate-check` `/consistency-check`
-
-**QA & Testing**
-`/qa-plan` `/smoke-check` `/soak-test` `/regression-suite` `/test-setup` `/test-helpers` `/test-evidence-review` `/test-flakiness` `/skill-test` `/skill-improve`
-
-**Production**
-`/milestone-review` `/retrospective` `/bug-report` `/bug-triage` `/reverse-document` `/playtest-report`
-
-**Release**
-`/release-checklist` `/launch-checklist` `/changelog` `/patch-notes` `/hotfix`
-
-**Creative & Content**
-`/prototype` `/onboard` `/localize`
-
-**Team Orchestration** (coordinate multiple agents on a single feature)
-`/team-combat` `/team-narrative` `/team-ui` `/team-release` `/team-polish` `/team-audio` `/team-level` `/team-live-ops` `/team-qa`
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Git](https://git-scm.com/)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
-- **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
+- **Unity 6.3 LTS** (6000.3.x) with URP 2D template
+- Git
 
-All hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
+### Clone & Open
 
-### Setup
-
-1. **Clone or use as template**:
-   ```bash
-   git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git my-game
-   cd my-game
-   ```
-
-2. **Open Claude Code** and start a session:
-   ```bash
-   claude
-   ```
-
-3. **Run `/start`** — the system asks where you are (no idea, vague concept,
-   clear design, existing work) and guides you to the right workflow. No assumptions.
-
-   Or jump directly to a specific skill if you already know what you need:
-   - `/brainstorm` — explore game ideas from scratch
-   - `/setup-engine godot 4.6` — configure your engine if you already know
-   - `/project-stage-detect` — analyze an existing project
-
-## Upgrading
-
-Already using an older version of this template? See [UPGRADING.md](UPGRADING.md)
-for step-by-step migration instructions, a breakdown of what changed between
-versions, and which files are safe to overwrite vs. which need a manual merge.
-
-## Project Structure
-
-```
-CLAUDE.md                           # Master configuration
-.claude/
-  settings.json                     # Hooks, permissions, safety rules
-  agents/                           # 49 agent definitions (markdown + YAML frontmatter)
-  skills/                           # 72 slash commands (subdirectory per skill)
-  hooks/                            # 12 hook scripts (bash, cross-platform)
-  rules/                            # 11 path-scoped coding standards
-  statusline.sh                     # Status line script (context%, model, stage, epic breadcrumb)
-  docs/
-    workflow-catalog.yaml           # 7-phase pipeline definition (read by /help)
-    templates/                      # 39 document templates
-src/                                # Game source code
-assets/                             # Art, audio, VFX, shaders, data files
-design/                             # GDDs, narrative docs, level designs
-docs/                               # Technical documentation and ADRs
-tests/                              # Test suites (unit, integration, performance, playtest)
-tools/                              # Build and pipeline tools
-prototypes/                         # Throwaway prototypes (isolated from src/)
-production/                         # Sprint plans, milestones, release tracking
+```bash
+git clone https://github.com/g759472683-bot/Echoes.git
+cd Echoes
 ```
 
-## How It Works
+1. Open Unity Hub → **Add Project from Disk** → select the cloned directory
+2. Unity imports packages and compiles `Echoes.Core` + `Echoes.Editor` assemblies
+3. Open `Window → Asset Management → Addressables → Groups` to verify
 
-### Agent Coordination
+### Run Tests
 
-Agents follow a structured delegation model:
-
-1. **Vertical delegation** — directors delegate to leads, leads delegate to specialists
-2. **Horizontal consultation** — same-tier agents can consult each other but can't make binding cross-domain decisions
-3. **Conflict resolution** — disagreements escalate up to the shared parent (`creative-director` for design, `technical-director` for technical)
-4. **Change propagation** — cross-department changes are coordinated by `producer`
-5. **Domain boundaries** — agents don't modify files outside their domain without explicit delegation
-
-### Collaborative, Not Autonomous
-
-This is **not** an auto-pilot system. Every agent follows a strict collaboration protocol:
-
-1. **Ask** — agents ask questions before proposing solutions
-2. **Present options** — agents show 2-4 options with pros/cons
-3. **You decide** — the user always makes the call
-4. **Draft** — agents show work before finalizing
-5. **Approve** — nothing gets written without your sign-off
-
-You stay in control. The agents provide structure and expertise, not autonomy.
-
-### Automated Safety
-
-**Hooks** run automatically on every session:
-
-| Hook | Trigger | What It Does |
-|------|---------|--------------|
-| `validate-commit.sh` | PreToolUse (Bash) | Checks for hardcoded values, TODO format, JSON validity, design doc sections — exits early if the command is not `git commit` |
-| `validate-push.sh` | PreToolUse (Bash) | Warns on pushes to protected branches — exits early if the command is not `git push` |
-| `validate-assets.sh` | PostToolUse (Write/Edit) | Validates naming conventions and JSON structure — exits early if the file is not in `assets/` |
-| `session-start.sh` | Session open | Shows current branch and recent commits for orientation |
-| `detect-gaps.sh` | Session open | Detects fresh projects (suggests `/start`) and missing design docs when code or prototypes exist |
-| `pre-compact.sh` | Before compaction | Preserves session progress notes |
-| `post-compact.sh` | After compaction | Reminds Claude to restore session state from `active.md` |
-| `notify.sh` | Notification event | Shows Windows toast notification via PowerShell |
-| `session-stop.sh` | Session close | Archives `active.md` to session log and records git activity |
-| `log-agent.sh` | Agent spawned | Audit trail start — logs subagent invocation |
-| `log-agent-stop.sh` | Agent stops | Audit trail stop — completes subagent record |
-| `validate-skill-change.sh` | PostToolUse (Write/Edit) | Advises running `/skill-test` after any `.claude/skills/` change |
-
-> **Note**: `validate-commit.sh`, `validate-assets.sh`, and `validate-skill-change.sh` fire on every Bash/Write tool call and exit immediately (exit 0) when the command or file path is not relevant. This is normal hook behavior — not a performance concern.
-
-**Permission rules** in `settings.json` auto-allow safe operations (git status, test runs) and block dangerous ones (force push, `rm -rf`, reading `.env` files).
-
-### Path-Scoped Rules
-
-Coding standards are automatically enforced based on file location:
-
-| Path | Enforces |
-|------|----------|
-| `src/gameplay/**` | Data-driven values, delta time usage, no UI references |
-| `src/core/**` | Zero allocations in hot paths, thread safety, API stability |
-| `src/ai/**` | Performance budgets, debuggability, data-driven parameters |
-| `src/networking/**` | Server-authoritative, versioned messages, security |
-| `src/ui/**` | No game state ownership, localization-ready, accessibility |
-| `design/gdd/**` | Required 8 sections, formula format, edge cases |
-| `tests/**` | Test naming, coverage requirements, fixture patterns |
-| `prototypes/**` | Relaxed standards, README required, hypothesis documented |
-
-## Design Philosophy
-
-This template is grounded in professional game development practices:
-
-- **MDA Framework** — Mechanics, Dynamics, Aesthetics analysis for game design
-- **Self-Determination Theory** — Autonomy, Competence, Relatedness for player motivation
-- **Flow State Design** — Challenge-skill balance for player engagement
-- **Bartle Player Types** — Audience targeting and validation
-- **Verification-Driven Development** — Tests first, then implementation
-
-## Customization
-
-This is a **template**, not a locked framework. Everything is meant to be customized:
-
-- **Add/remove agents** — delete agent files you don't need, add new ones for your domains
-- **Edit agent prompts** — tune agent behavior, add project-specific knowledge
-- **Modify skills** — adjust workflows to match your team's process
-- **Add rules** — create new path-scoped rules for your project's directory structure
-- **Tune hooks** — adjust validation strictness, add new checks
-- **Pick your engine** — use the Godot, Unity, or Unreal agent set (or none)
-- **Set review intensity** — `full` (all director gates), `lean` (phase gates only), or `solo` (none). Set during `/start` or edit `production/review-mode.txt`. Override per-run with `--review solo` on any skill.
-
-## Platform Support
-
-Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns (`grep -E`, not `grep -P`) and include fallbacks for missing tools. Works on macOS and Linux without modification.
-
-## Community
-
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Claude-Code-Game-Studios/issues)
+```bash
+# GUI: Window → General → Test Runner → Run All
+# CLI:
+unity -runTests -projectPath . -testPlatform PlayMode
+```
 
 ---
 
-## Supporting This Project
+## Development Workflow
 
-Claude Code Game Studios is free and open source. If it saves you time or helps you ship your game, consider supporting continued development:
+This project uses the Claude Code Game Studios framework — 49 specialized AI agents coordinated through skills and phase gates.
 
-<p>
-  <a href="https://www.buymeacoffee.com/donchitos3"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee"></a>
-  &nbsp;
-  <a href="https://github.com/sponsors/Donchitos"><img src="https://img.shields.io/badge/GitHub%20Sponsors-ea4aaa?style=for-the-badge&logo=githubsponsors&logoColor=white" alt="GitHub Sponsors"></a>
+| Skill | Purpose |
+|---|---|
+| `/story-readiness [path]` | Validate a story before starting |
+| `/dev-story [path]` | Implement a story with the right programmer agent |
+| `/code-review [files]` | Review against ADRs, standards, and SOLID |
+| `/story-done [path]` | Verify acceptance criteria and close |
+| `/gate-check [phase]` | Validate phase-gate readiness |
+
+See `CLAUDE.md` and `production/epics/` for the full sprint structure.
+
+---
+
+## Credits
+
+Built with the [Claude Code Game Studios](https://github.com/Donchitos/Claude-Code-Game-Studios) AI agent framework.
+
+---
+
+<p align="center">
+  <i>每一帧画面都应是一幅可以挂上墙的画。<br>
+  Every frame should be a painting you could hang on a wall.</i>
 </p>
-
-- **[Buy Me a Coffee](https://www.buymeacoffee.com/donchitos3)** — one-time support
-- **[GitHub Sponsors](https://github.com/sponsors/Donchitos)** — recurring support through GitHub
-
-Sponsorships help fund time spent maintaining skills, adding new agents, keeping up with Claude Code and engine API changes, and responding to community issues.
-
----
-
-*Built for Claude Code. Maintained and extended — contributions welcome via [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions).*
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
