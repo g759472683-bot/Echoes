@@ -38,4 +38,4 @@ jobs:
           projectPath: .
           testMode: ${{ matrix.testMode }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 6000.3.45f1
+          unityVersion: 6000.0.75f1
